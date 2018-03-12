@@ -1,15 +1,31 @@
-FROM java:8
+# Divolte 
+#
+# Divolte Documentation:
+# www.divolte.io
+#
 
-WORKDIR /usr/local/
+FROM java:8-jre
 
-RUN wget http://divolte-releases.s3-website-eu-west-1.amazonaws.com/divolte-collector/0.7.0/distributions/divolte-collector-0.7.0.tar.gz
-RUN tar -xzvf divolte-collector-*.tar.gz --strip-components=1 
-RUN rm divolte-collector-*.tar.gz
+#
+# Prerequisite: Create some folders for later usage
+#
+RUN mkdir -p /opt/divolte
 
-ADD conf/divolte-collector.conf /usr/local/conf/
+#
+# Download and Install Divolte
+#
+RUN curl -o divolte-collector-0.7.0.tar.gz http://divolte-releases.s3-website-eu-west-1.amazonaws.com/divolte-collector/0.7.0/distributions/divolte-collector-0.7.0.tar.gz && \
+    tar zxpf divolte-collector-0.7.0.tar.gz -C /opt/divolte
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+#
+# Configuration changes using divolte-collector.conf
+#
+ADD conf/divolte-collector.conf /opt/divolte/divolte-collector-0.7.0/conf/divolte-collector.conf
+RUN chown root:root /opt/divolte/divolte-collector-0.7.0/conf/divolte-collector.conf
 
+#
+# Expose the Divolte Collector click simulation web page
+#
 EXPOSE 8290
 
-ENTRYPOINT ["divolte-collector"]
+CMD ["/opt/divolte/divolte-collector-0.7.0/bin/divolte-collector"]
