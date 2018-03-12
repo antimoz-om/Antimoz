@@ -1,0 +1,42 @@
+version: "3.3"
+services:
+  # Kafka/Zookeeper container
+  divolte-kafka:
+    image: krisgeus/docker-kafka
+    container_name: divolte-kafka
+    hostname: divolte-kafka
+    domainname: divolte_divolte.io
+    environment:
+      ADVERTISED_HOST: divolte-kafka
+      LOG_RETENTION_HOURS: 1
+      AUTO_CREATE_TOPICS: "false"
+      KAFKA_CREATE_TOPICS: divolte:4:1
+      ADVERTISED_LISTENERS: PLAINTEXT://divolte-kafka:9092,INTERNAL://localhost:9093
+      LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
+      SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      INTER_BROKER: INTERNAL
+    ports:
+      - 9092:9092 # kafka broker
+      - 2181:2181 # Zookeeper
+    networks:
+      - divolte.io
+  # Divolte container
+  docker-divolte:
+    image: krisgeus/docker-divolte
+    container_name: docker-divolte
+    hostname: docker-divolte
+    domainname: divolte_divolte.io
+    environment:
+      DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
+    ports:
+      - 8290:8290
+    depends_on:
+      - divolte-kafka
+    links:
+      - divolte-kafka:divolte-kafka
+    networks:
+      - divolte.io
+  
+networks:
+  divolte.io:
+    driver: bridge
