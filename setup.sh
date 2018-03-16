@@ -3,5 +3,6 @@ curl -O http://divolte-releases.s3-website-eu-west-1.amazonaws.com/divolte-colle
 tar -xzf divolte-collector-*.tar.gz
 rm -rf divolte-collector-*.tar.gz
 cd divolte-collector-*
+export JAVA_HOME=/usr/lib/jvm/default
 
 #
