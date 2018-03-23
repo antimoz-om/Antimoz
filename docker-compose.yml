@@ -3,7 +3,7 @@ services:
 
   # Kafka/Zookeeper container
   divolte-kafka:
-    image: krisgeus/docker-kafka
+    build: kafka/
     environment:
       ADVERTISED_HOST: divolte-kafka
       LOG_RETENTION_HOURS: 1
@@ -16,7 +16,7 @@ services:
 
   # Divolte container
   docker-divolte:
-    build: .
+    build: divolte/
     environment:
       DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
     ports:
