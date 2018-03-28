@@ -1,7 +1,7 @@
 Hadoop Container
 ================
 
-Credit: Author: Hari Sekhon
-https://www.linkedin.com/in/harisekhon
+Dockerfile created by Hari Sekhon: 
 
-Dockerfile created by Hari Sekhon: https://github.com/HariSekhon.
+https://github.com/HariSekhon
+https://www.linkedin.com/in/harisekhon
