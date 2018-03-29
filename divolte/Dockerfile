@@ -12,4 +12,4 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 EXPOSE 8290
 
-ENTRYPOINT ["divolte-collector"]
+ENTRYPOINT ["/usr/local/divolte-collector-0.7.0/bin/divolte-collector"]
