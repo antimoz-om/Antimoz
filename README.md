@@ -9,4 +9,4 @@ Read more: https://medium.com/transparent-analytics
 Software Architecture
 =====================
 
-![alt text](antimoz/img/Antimoz code structure - Page 1.png)
+![alt text](https://github.com/antimoz-om/antimoz/raw/master/img/Antimoz%20code%20structure%20-%20Page%201.png)
