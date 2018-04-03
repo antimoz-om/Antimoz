@@ -1,5 +1,7 @@
 #! /bin/bash
 
+## Author: Bryan Dieudonne
+
 # remove any existing containers named hadoop
 docker rm -f -v hadoop
 
