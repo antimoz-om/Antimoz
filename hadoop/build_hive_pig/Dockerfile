@@ -3,7 +3,7 @@
 
 # Build pseudo-distrubuted Hadoop 2.9
 FROM harisekhon/centos-java:latest
-MAINTAINER bdieu178
+MAINTAINER bdieu178 <bdieu17@gmail.com>
 
 ARG PIG_VERSION=0.16.0
 ARG HIVE_VERSION=2.3.3
