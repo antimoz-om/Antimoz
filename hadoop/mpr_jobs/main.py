@@ -1,4 +1,5 @@
-####################################
+#! /usr/bin/env python
+###################################
 
 # MapReduce Job in Python
 # Bring in Google Search console
@@ -14,18 +15,31 @@
 from mrjob.job import MRJob        # MRJob library
 import re                          #regular expression library
 import gscquery
+import subprocess
 
 ####################################
 
 
 
 ####################################
-## Import Unsampled Google Search Console Data
+## Check if Hadoop is runnning
 ##
 
+# hadoop_on = subprocess.run("hdfs ")
+if (!hadoop_on):
+    ## run this if hadoop is off
+else:
+    ## run this if hadoop is on
 
+    ####################################
+    ## Download Unsampled Google Search Console Data
+    ## onto the HDFS
+    ##
 
+    #execute gscquery.main
+    #need to pass ENV varibals for arguments
+    bashCMD = "${HOME}/"
+    def push_GSC_onto_HDFS(gscquery.main(), bashCMD)
+        "save file to commane"
 
-
-##################
-##
+        return
