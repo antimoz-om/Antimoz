@@ -1,5 +1,4 @@
 Hadoop Ecosystem
 ================
 
-Core repository built from by Hari Sekhon (harisekhon/centos-java:latest)
-  -> https://github.com/HariSekhon
+Core repository built from [harisekhon/centos-java:latest](https://github.com/harisekhon/Dockerfiles)
