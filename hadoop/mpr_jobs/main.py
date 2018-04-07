@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-###################################
+"""
 
 # Author:  Bryan Dieudonne
 
@@ -10,7 +10,7 @@
 # process the file with MR-Job
 # send o to HIVE data store
 
-####################################
+""
 
 from mrjob.job import MRJob        # MRJob library
 import re                          #regular expression library
@@ -22,13 +22,13 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 def main():
     ####################################
-    ## Check if Hadoop is runnning
+    ## Check if Hadoop is runnning <-- fix this later April 7th, 2018 2:30 pm
     bool hadoop_on = False
     #add  do while to this after
     while(!hadoop_on):
         ## check hadoop
-        if this runs true <-- (subprocess.run(["hadoop version"]))
-        hadoop_on = True
+        subprocess.check_output(["hadoop version"])
+        #hadoop_on = True
         break
 
     ####################################
@@ -52,14 +52,14 @@ def main():
             @start_date
             @end_date
             """
-            #launch bash CMD
+            #Pull GSC data
             subprocess.run([program,URI,start_date,end_date])
 
             ## check if filepath exits
                 # if filepath does not exist create the file PATH
 
-            copyTohdfs = "hdfs f -CopyToLocal {file path..}" # fix this
-
+            copyTohadoop = "hadoop fs -copyFromLocal ${localfile}" # fix this
+            subprocess.run(copyTohadoop)
 
 
         #run hive command
