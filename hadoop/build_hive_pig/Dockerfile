@@ -11,7 +11,7 @@ ARG HIVE_VERSION=2.3.3
 # hadoop-common fixes
 ENV PATH $PATH:$HADOOP_PREFIX/bin
 
-# pig #edit this
+# pig
 RUN curl -s http://apache.mirror.anlx.net/pig/pig-${PIG_VERSION}/pig-${PIG_VERSION}.tar.gz | tar -xz -C /usr/local
 ENV PIG_HOME /usr/local/pig-${PIG_VERSION}/
 RUN ln -s $PIG_HOME /usr/local/pig
