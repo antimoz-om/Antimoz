@@ -1,5 +1,4 @@
-#!/usr/bin/bash
-
+#! /usr/bin/env bash
 ## Author: Bryan Dieudonne
 
 # remove any existing containers named hadoop
