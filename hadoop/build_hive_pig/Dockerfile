@@ -2,7 +2,7 @@
 
 
 # Build pseudo-distrubuted Hadoop 2.9
-FROM harisekhon/hadoop:latest
+FROM harisekhon/hadoop:2.9
 MAINTAINER bdieu178
 
 ARG PIG_VERSION=0.16.0
