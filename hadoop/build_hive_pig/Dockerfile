@@ -28,13 +28,13 @@ RUN ln -s $HIVE_HOME /usr/local/hive
 ENV PATH $PATH:$HIVE_HOME/bin
 
 #add PostGres datastore & Python --> test this
-RUN sudo yum -y update
-RUN sudo yum install postgresql-server postgresql-contrib
-RUN sudo postgresql-setup initdb
-RUN sudo yum -y install yum-utils
-RUN sudo yum -y groupinstall development
-RUN sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
-RUN sudo yum -y install python36u
+RUN yum -y update
+RUN yum install postgresql-server postgresql-contrib
+RUN postgresql-setup initdb
+RUN yum -y install yum-utils
+RUN yum -y groupinstall development
+RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+RUN yum -y install python36u
 #(insert assert function here)
 
 RUN apt-get install -y python3.5 python3.5-dev python3-pip python-dev python3-dev postgresql postgresql-server-dev-all sudo
