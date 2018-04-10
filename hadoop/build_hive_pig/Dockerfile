@@ -33,8 +33,8 @@ RUN sudo yum install postgresql-server postgresql-contrib
 RUN sudo postgresql-setup initdb
 RUN sudo yum -y install yum-utils
 RUN sudo yum -y groupinstall development
-sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
-sudo yum -y install python36u
+RUN sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+RUN sudo yum -y install python36u
 #(insert assert function here)
 
 RUN apt-get install -y python3.5 python3.5-dev python3-pip python-dev python3-dev postgresql postgresql-server-dev-all sudo
