@@ -22,3 +22,13 @@ RUN curl -s http://apache.mirror.anlx.net/hive/hive-${HIVE_VERSION}/apache-hive-
 ENV HIVE_HOME /usr/local/apache-hive-${HIVE_VERSION}-bin/
 RUN ln -s $HIVE_HOME /usr/local/hive
 ENV PATH $PATH:$HIVE_HOME/bin
+
+#add PostGres datastore & Python --> test this
+RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get update -qy
+RUN apt-get install -y python3.5 python3.5-dev python3-pip python-dev python3-dev postgresql postgresql-server-dev-all sudo
+
+
+#add Psycopg library <--processing csv files into PostGres.
+RUN pip install psycopg2-binary
