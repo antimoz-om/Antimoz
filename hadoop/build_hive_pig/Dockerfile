@@ -29,7 +29,7 @@ ENV PATH $PATH:$HIVE_HOME/bin
 
 #add PostGres datastore & Python --> test this
 RUN yum -y update
-RUN yum install postgresql-server postgresql-contrib
+RUN yum -y install postgresql-server postgresql-contrib
 RUN postgresql-setup initdb
 RUN yum -y install yum-utils
 RUN yum -y groupinstall development
