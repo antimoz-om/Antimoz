@@ -30,7 +30,7 @@ ENV PATH $PATH:$HIVE_HOME/bin
 #add PostGres datastore & Python --> test this
 RUN yum -y update
 RUN yum -y install postgresql-server postgresql-contrib
-RUN postgresql-setup initdb
+#RUN postgresql-setup initdb
 RUN yum -y install yum-utils
 RUN yum -y groupinstall development
 RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
@@ -41,4 +41,5 @@ RUN apt-get install -y python3.5 python3.5-dev python3-pip python-dev python3-de
 
 
 #add Psycopg library <--processing csv files into PostGres.
+RUN pip install -U pip
 RUN pip install psycopg2-binary
