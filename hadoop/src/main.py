@@ -14,23 +14,18 @@ import psycopg2
 #returns string of current directory of file
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-def check_hadoop():
+def run_hadoop():
     """ Check if hadoop is on. Turn on hadoop if off"""
 
     ## Check if Hadoop is runnning <-- fix this later April 7th, 2018 2:30 pm
     hadoop_status = False
     #add  do while to this after
-    #check_hadoop = subprocess.check_output(["hadoop version"]) # fix logic
+        check_hadoop = subprocess.check_output(["hadoop version"]) # fix logic
 
     while(!hadoop_status): #<-- when do I implement exception handling?
-        #process this ouput for a string in the stdout"
         subprocess.run("../run_hadoop.sh")
-        return True
+        # subprocess.run("hadoop") # need to check if hadoop is on
         break
-    if (!hadoop_status):
-        ## run this if hadoop is off
-    else:
-        ## run this if hadoop is on:
 
 def push_GSC_onto_HDFS(program,URI,start_date,end_date):
     """
@@ -51,25 +46,39 @@ def push_GSC_onto_HDFS(program,URI,start_date,end_date):
     subprocess.run(create_hdfs_dir)
     subprocess.run(copyTohadoop)
 
-def postgres_process():
-    """ Insert data into PostGres & transform the data using psycopg2 """
+def run_postgres_process():
+    """ Insert csv file data into PostGres & transform the data using psycopg2 """
 
     host = "localhost"
     db   = "postgres"
     usr  = "postgres"
+
+
     server = psycopg2.connect("host=%s dbname=%s user=%s") %(host,db,usr)  # insert host dbname & user for Postgres instance
+    data = server.cursor
+    #cmd = insert execute command here
 
-    ## create a table in PostGres
+    ## create a table in Postgres called 'GoogleSearchConsole'
+        ## how
+    data.execute("""
+    CREATE TABLE GoogleSearchConsole (
+        id integar PRIMARY KEY
+        Date_Time text
+        Clicks integer
+        Impressions number
+        CTR float
+        Position float
+        )
+    """)
 
-
-
-
-
-    obj = server.cursor
-    with open('##csv file name##','r') as file:
+    with open('output.csv','r') as file:
         next(file)
-        obj.copy_from(file,)
-
+        next(file)
+        # if line in document contains string "totals" skip to next line
+        data.copy_from(file, 'GoogleSearchConsole', sep='\t')
+        #stop if 'file'
+    data.commit()
+    #add test code
 
 def main():
     """ Implement Rhea's data transformation- One-time use """
@@ -80,12 +89,11 @@ def main():
     start_date = "2018-01-01"         # prompt CMD line input / sample <- complete later
     end_date = "2018-03-30"           #
 
-    hadoop_on = check_hadoop()        # debug this
-    if (!hadoop_on):
-        ## run this is hadoop is not on
-    else:
-        push_GSC_onto_HDFS(program,URI,start_date,end_date) ## Pull GSC  data & push csv file into HDFS
-        postgres_process()                                  ## Import CSV file into postgres
+    run_hadoop()                                        ## Implement this this
+    push_GSC_onto_HDFS(program,URI,start_date,end_date) ## Pull GSC  data & push csv file into HDFS
+    run_postgres_process()   #debug this     ## Import CSV file into postgres
+
+
 
 if __name__ == '__main__':
     main()
