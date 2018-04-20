@@ -1,0 +1,25 @@
+version: "3.3"
+services:
+  # Kafka/Zookeeper container
+  divolte-kafka:
+    build: kafka/
+    environment:
+      ADVERTISED_HOST: divolte-kafka
+      LOG_RETENTION_HOURS: 1
+      AUTO_CREATE_TOPICS: "false"
+      KAFKA_CREATE_TOPICS: divolte:4:1
+      ADVERTISED_LISTENERS: PLAINTEXT://divolte-kafka:9092,INTERNAL://localhost:9093
+      LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
+      SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      INTER_BROKER: INTERNAL
+  # Divolte container
+  docker-divolte:
+    build: divolte/
+    environment:
+      DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
+    ports:
+      - 8290:8290
+      - 9092:9092 #kafka broker
+      - 2181:2181 #Zookeeper
+    depends_on:
+      - divolte-kafka
