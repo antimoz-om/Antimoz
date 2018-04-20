@@ -1,8 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """
 
 Orginal source code author:  Stephan Solomonidis
 https://github.com/stephan765
+
+Edited by: Bryan Dieudonne
 
 A script to iterate through the available filters on Google Search Console, minimising sampling issues by extracting each possible combination of filters.
 
@@ -30,7 +32,7 @@ from oauth2client.client import flow_from_clientsecrets
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-WEBMASTER_CREDENTIALS_FILE_PATH = "client_secrets.json"
+WEBMASTER_CREDENTIALS_FILE_PATH = "/Users/bryandieudonne/antimoz/hadoop/src/testing/webmasters.dat" #debug this
 
 
 def rate_limit(max_per_minute):
@@ -47,7 +49,7 @@ def rate_limit(max_per_minute):
             elapsed = time.clock() - last_time_called[0]
             wait_for = min_interval - elapsed
             if wait_for > 0:
-                time.sleep(wait_for)2
+                time.sleep(wait_for)
             ret = func(*args, **kwargs)
             last_time_called[0] = time.clock()
             return ret
@@ -220,7 +222,6 @@ def main():
     Dispatch queries to the GSC API.
     """
     args = parse_command_line_options()
-
 
     '''
     Check the argsparser object for a file path to text file listing pages to read
