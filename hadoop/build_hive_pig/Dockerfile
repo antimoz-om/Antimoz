@@ -39,6 +39,6 @@ RUN yum -y update
 RUN yum -y clean all
 RUN yum -y install python-pip
 
-#add Psycopg library: processing csv files into PostGres.
+#add Psycopg library: process csv files into PostGres using Python.
 RUN pip install -U pip
 RUN pip install psycopg2-binary
