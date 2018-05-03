@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.4"
 services:
   # Kafka/Zookeeper container
   divolte-kafka:
@@ -23,3 +23,5 @@ services:
       - 2181:2181 #Zookeeper
     depends_on:
       - divolte-kafka
+
+  #

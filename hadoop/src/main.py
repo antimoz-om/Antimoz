@@ -2,10 +2,10 @@
 """
 # Author:  Bryan Dieudonne
 
+A script to pull data from Google Search Console (G) & Google Analytics
+& push into a Postgres table
 """
 
-from mrjob.job import MRJob        # MRJob library
-import re                          #regular expression library
 import gscquery
 import subprocess
 import os
@@ -29,7 +29,7 @@ def run_hadoop():
 
 def push_GSC_onto_HDFS(program,URI,start_date,end_date):
     """
-    Download Unsampled Google Search Console Data onto HDFS.
+    Download Unsampled Google Search Console Data & Push onto HDFS.
     Parameters:
     @Program    - file path of python script
     @URI        - the domain for Google Search Console
@@ -41,18 +41,21 @@ def push_GSC_onto_HDFS(program,URI,start_date,end_date):
 
     #Pull GSC data into local file
     subprocess.run([program,URI,start_date,end_date])
-    ## check if filepath exits
-        # if filepath does not exist create the file PATH
+    # check if filepath exits
+        ## if filepath does not exist create the file PATH
     subprocess.run(create_hdfs_dir)
     subprocess.run(copyTohadoop)
 
 def run_postgres_process():
     """ Insert csv file data into PostGres & transform the data using psycopg2 """
 
+    #add in request for user input
     host = "localhost"
     db   = "postgres"
     usr  = "postgres"
 
+    #check if database if represent
+    #if db is not present then need to create a table <<-- need to implement
 
     server = psycopg2.connect("host=%s dbname=%s user=%s") %(host,db,usr)  # insert host dbname & user for Postgres instance
     data = server.cursor
@@ -61,7 +64,7 @@ def run_postgres_process():
     ## create a table in Postgres called 'GoogleSearchConsole'
         ## how
     data.execute("""
-    CREATE TABLE GoogleSearchConsole (
+    CREATE TABLE GSC_URLs (
         id integar PRIMARY KEY
         Date_Time text
         Clicks integer
@@ -71,6 +74,7 @@ def run_postgres_process():
         )
     """)
 
+    ## add data to table
     with open('output.csv','r') as file:
         next(file)
         next(file)
@@ -89,8 +93,9 @@ def main():
     start_date = "2018-01-01"         # prompt CMD line input / sample <- complete later
     end_date = "2018-03-30"           #
 
-    run_hadoop()                                        ## Implement this this
-    push_GSC_onto_HDFS(program,URI,start_date,end_date) ## Pull GSC  data & push csv file into HDFS
+    ## Implement this this
+    run_hadoop()
+    push_GSC_onto_HDFS(program,URI,start_date,end_date)
     run_postgres_process()   #debug this     ## Import CSV file into postgres
 
 

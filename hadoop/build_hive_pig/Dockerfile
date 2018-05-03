@@ -32,7 +32,6 @@ RUN yum -y update
 RUN yum -y clean all
 RUN yum -y install postgresql-server postgresql-contrib
 
-
 #install Python
 RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum -y install python36u python36u-setuptools python36u-pip python36u-devel
