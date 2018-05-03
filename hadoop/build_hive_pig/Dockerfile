@@ -30,7 +30,7 @@ RUN yum -y install yum-utils
 RUN yum -y groupinstall development
 RUN yum -y update
 RUN yum -y install postgresql-server postgresql-contrib
-RUN service postgresql initdb
+RUN service postgresql-setup initdb
 RUN systemctl enable postgresql
 RUN systemctl start postgresql
 
