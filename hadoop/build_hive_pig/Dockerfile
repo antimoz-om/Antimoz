@@ -29,10 +29,9 @@ ENV PATH $PATH:$HIVE_HOME/bin
 RUN yum -y install yum-utils
 RUN yum -y groupinstall development
 RUN yum -y update
+RUN yum -y clean all
 RUN yum -y install postgresql-server postgresql-contrib
-RUN sudo postgresql-setup initdb
-RUN systemctl enable postgresql
-RUN systemctl start postgresql
+
 
 #install Python
 RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
