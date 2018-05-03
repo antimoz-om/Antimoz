@@ -38,5 +38,5 @@ RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum -y install python36u python36u-pip python36u-devel
 
 #add Psycopg library: processing csv files into PostGres.
-RUN pip install -U pip
-RUN pip install psycopg2-binary
+RUN pip3 install -U pip3
+RUN pip3 install psycopg2-binary
