@@ -37,7 +37,7 @@ RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum -y install python36u
 #(insert assert function here)
 
-RUN apt-get install -y python3.5 python3.5-dev python3-pip python-dev python3-dev postgresql postgresql-server-dev-all sudo
+RUN yum install -y python3.5 python3.5-dev python3-pip python-dev python3-dev postgresql postgresql-server-dev-all sudo
 
 
 #add Psycopg library <--processing csv files into PostGres.
