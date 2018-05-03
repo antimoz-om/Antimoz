@@ -35,8 +35,9 @@ RUN yum -y install postgresql-server postgresql-contrib
 
 #install Python
 RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
-RUN yum -y install python36u python36u-pip python36u-devel
+RUN yum -y install python36u python36u-setuptools python36u-pip python36u-devel
 
 #add Psycopg library: processing csv files into PostGres.
-RUN pip3 install -U pip3
-RUN pip3 install psycopg2-binary
+RUN python3.6 -m venv venv
+RUN pip install -U pip
+RUN pip install psycopg2-binary
