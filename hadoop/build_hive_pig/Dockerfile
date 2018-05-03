@@ -3,8 +3,6 @@
 #
 #
 
-
-
 # Build pseudo-distrubuted Hadoop 2.3
 FROM harisekhon/hadoop:2.3
 MAINTAINER bdieu178
@@ -27,19 +25,19 @@ ENV HIVE_HOME /usr/local/apache-hive-${HIVE_VERSION}-bin/
 RUN ln -s $HIVE_HOME /usr/local/hive
 ENV PATH $PATH:$HIVE_HOME/bin
 
-#add PostGres datastore & Python --> test this
-RUN yum -y update
-RUN yum -y install postgresql-server postgresql-contrib
-#RUN postgresql-setup initdb
+#add PostGres datastore
 RUN yum -y install yum-utils
 RUN yum -y groupinstall development
+RUN yum -y update
+RUN yum -y install postgresql-server postgresql-contrib
+RUN service postgresql initdb
+RUN systemctl enable postgresql
+RUN systemctl start postgresql
+
+#install Python
 RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
-RUN yum -y install python36u
-#(insert assert function here)
+RUN yum -y install python36u python36u-pip python36u-devel
 
-RUN yum install -y python3.5 python3.5-dev python3-pip python-dev python3-dev postgresql postgresql-server-dev-all sudo
-
-
-#add Psycopg library <--processing csv files into PostGres.
+#add Psycopg library: processing csv files into PostGres.
 RUN pip install -U pip
 RUN pip install psycopg2-binary
