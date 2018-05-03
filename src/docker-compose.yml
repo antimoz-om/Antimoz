@@ -24,4 +24,6 @@ services:
     depends_on:
       - divolte-kafka
 
-  #
+  # HDFS + Hive + Pig + PostGres
+  hadoop:
+    build: hadoop/build_hive_pig/
