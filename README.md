@@ -10,5 +10,4 @@ The Divolte Collector is ..
 
 ## Pipeline Architecture
 
-![alt 
-text](https://github.com/antimoz-om/antimoz/raw/master/Documents/Antimoz%20code%20structure%20-%20Page%201.png)
+![alt text](https://github.com/antimoz-om/antimoz/raw/master/Documents/Antimoz%20code%20structure%20-%20Page%201.png)
