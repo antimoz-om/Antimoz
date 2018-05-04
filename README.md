@@ -4,9 +4,6 @@ A data engineering pipeline for digital marketers.
 
 Read more: https://medium.com/transparent-analytics
 
-## Ingestion & Filesystem Layer
-
-The Divolte Collector is ..
 
 ## Pipeline Architecture
 
